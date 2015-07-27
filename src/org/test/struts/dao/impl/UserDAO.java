@@ -39,4 +39,14 @@ public class UserDAO implements IUserDAO {
 		System.out.println("insert done : count = "+cout);
 		return cout;
 	}
+
+	@Override
+	public boolean checkUsernameRepeat(String username) {
+		System.out.println("dao checkUsernameRepeat starting ，，，，， ");
+		String sql = "select count(*) from user where username=? ";
+		@SuppressWarnings("deprecation")
+		int count = jdbcTemplate.queryForInt(sql, new Object[] { username });
+
+		return count>0;
+	}
 }
